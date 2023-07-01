@@ -1,11 +1,10 @@
 # Arch-Install-Notes
 
-################# [TASTIERA]      #########################################################################################################################
-
+# [TASTIERA]
 loadkeys it
 
 
-################# [RETE]          #########################################################################################################################
+# [RETE]
 
 iwctl
 station wlan0 connect [nome rete]
@@ -13,17 +12,14 @@ exit
 
 ping 8.8.8.8 -> controlla che ti risponda correttamente
 
-
-
-################# [TIMEZONE]      #########################################################################################################################
-
+# [TIMEZONE] 
 timedatectl set-timezone CET
 timedatectl set-tnp true
 date -> controlla che la data sia corretta
 
 
 
-################# [DISK PARTITION] ########################################################################################################################
+# [DISK PARTITION]
 fdisk -l -> controlla il disco su cui vuoi installare arch
 cfdisk /dev/<nome disco>
 
@@ -58,13 +54,13 @@ mount /dev/<partizione efi> /mnt/boot/efi
 
 swapon /dev/<partizione swap>
 
-################# [BASE INSTALLATION] ######################################################################################################################
+# [BASE INSTALLATION] 
 pacstrap /mnt base base-devel linux linux-firmware nano btrfs-progs grub-btrfs net-tools
 
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 
-################# [CHROOT]            ######################################################################################################################
+# [CHROOT] 
 ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime
 hwclock --systohc
 date -> controllare che la data sia esatta
@@ -81,7 +77,7 @@ nano /etc/hostname -> scrivere il nome di rete che si vuole per il dispositivo
 passwd -> inserire la password che si uole per il root
 
 
-################# [BOOTLOADER (GRUB)]            ###########################################################################################################
+## [BOOTLOADER (GRUB)] 
 pacman -S intel-ucode [se si ha una cpu intel altrimenti vedere guida]
 
 pacman -S grub efibootmgr
@@ -91,18 +87,18 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
 
-################# [POST INSTALLATION]            ###########################################################################################################
+# [POST INSTALLATION] 
 
 useradd -m enrico
 nano /etc/sudoers -> cerca wheel e cancella la riga per dare i privilegi al gruppo wheel
 usermod -aG wheel enrico
 
-################# [KDE]            ###########################################################################################################
+# [KDE] 
 
 pacman -S plasma-meta plasma-wayland-session kde-system-meta kde-utilities-meta kde-network-meta firefox
 systemctl enable sddm
 systemctl enable NetworkManager
 
-################# [DRIVER VIDEO]            ###########################################################################################################
+# [DRIVER VIDEO]
 pacman -S mesa vulkan-intel (solo per grafica intel altrimenti installare nvidia, vedere doc)
 
