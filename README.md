@@ -115,6 +115,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 useradd -m enrico
 
+passwd enrico
+
 nano /etc/sudoers -> cerca wheel e cancella la riga per dare i privilegi al gruppo wheel
 
 usermod -aG wheel enrico
