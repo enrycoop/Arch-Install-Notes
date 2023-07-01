@@ -1,32 +1,42 @@
 # Arch-Install-Notes
 
 # [TASTIERA]
+
 loadkeys it
 
 
 # [RETE]
 
 iwctl
+
 station wlan0 connect [nome rete]
+
 exit
 
 ping 8.8.8.8 -> controlla che ti risponda correttamente
 
 # [TIMEZONE] 
+
 timedatectl set-timezone CET
+
 timedatectl set-tnp true
+
 date -> controlla che la data sia corretta
 
-
-
 # [DISK PARTITION]
+
 fdisk -l -> controlla il disco su cui vuoi installare arch
+
 cfdisk /dev/<nome disco>
 
 se non è presente creare partition GPT
+
 creare tre partizioni
+
 512M EFI -> selezionare type EFI
+
 doppio della ram -> <partizione swap>
+
 root lo spazio restante
 
 # FORMATTAZIONE
@@ -35,6 +45,7 @@ mkfs.vfat -F32 /dev/<partizione efi>
 mkswap /dev/<partizione swap>
 
 mkfs.btrfs /dev/<partizione boot>
+
 mount /dev/<partizione boot> /mnt
 
 # creazione sottovolume @ di root
@@ -60,18 +71,24 @@ mount /dev/<partizione efi> /mnt/boot/efi
 swapon /dev/<partizione swap>
 
 # [BASE INSTALLATION] 
+
 pacstrap /mnt base base-devel linux linux-firmware nano btrfs-progs grub-btrfs net-tools
 
 genfstab -U /mnt >> /mnt/etc/fstab
+
 arch-chroot /mnt
 
 # [CHROOT] 
 ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime
+
 hwclock --systohc
+
 date -> controllare che la data sia esatta
 
 nano /etc/locale.gen
+
 ctrl + W -> cercare it_IT e decommentare la riga -> ctrl + x -> y -> invio
+
 locale-gen
 
 nano /etc/vconsole.conf
