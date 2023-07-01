@@ -38,18 +38,23 @@ mkfs.btrfs /dev/<partizione boot>
 mount /dev/<partizione boot> /mnt
 
 # creazione sottovolume @ di root
+
 btrfs subvolume create /mnt/@
+
 btrfs subvolume create /mnt/@home
 
 umount -R /mnt
 
 mount -o subvol=@ /dev/<partizione root> /mnt
+
 mkdir -p /mnt/home
+
 mount -o subvol=@home /dev/<partizione root> /mnt/home
 
 mount -> osservare se i volumi sono montati sotto mnt e mnt home
 
 mkdir -p /mnt/boot/efi
+
 mount /dev/<partizione efi> /mnt/boot/efi
 
 swapon /dev/<partizione swap>
@@ -70,6 +75,7 @@ ctrl + W -> cercare it_IT e decommentare la riga -> ctrl + x -> y -> invio
 locale-gen
 
 nano /etc/vconsole.conf
+
 scrivere LANG=it_IT.UTF-8 -> ctrl + x -> y -> invio
 
 nano /etc/hostname -> scrivere il nome di rete che si vuole per il dispositivo
@@ -78,6 +84,7 @@ passwd -> inserire la password che si uole per il root
 
 
 ## [BOOTLOADER (GRUB)] 
+
 pacman -S intel-ucode [se si ha una cpu intel altrimenti vedere guida]
 
 pacman -S grub efibootmgr
@@ -90,15 +97,20 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # [POST INSTALLATION] 
 
 useradd -m enrico
+
 nano /etc/sudoers -> cerca wheel e cancella la riga per dare i privilegi al gruppo wheel
+
 usermod -aG wheel enrico
 
 # [KDE] 
 
 pacman -S plasma-meta plasma-wayland-session kde-system-meta kde-utilities-meta kde-network-meta firefox
+
 systemctl enable sddm
+
 systemctl enable NetworkManager
 
 # [DRIVER VIDEO]
+
 pacman -S mesa vulkan-intel (solo per grafica intel altrimenti installare nvidia, vedere doc)
 
