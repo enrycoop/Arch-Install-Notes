@@ -72,7 +72,7 @@ swapon /dev/[partizione swap]
 
 # [BASE INSTALLATION]
 
-pacstrap /mnt base base-devel linux linux-firmware nano btrfs-progs grub-btrfs net-tools
+pacstrap -K /mnt base base-devel linux linux-firmware nano btrfs-progs grub-btrfs net-tools
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
