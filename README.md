@@ -1,19 +1,22 @@
 # Arch-Install-Notes
 
 # [TASTIERA]
-
-loadkeys it
-
+Per impostare la tastiera in italiano...
+```loadkeys it```
+Per cambiare il font digitare il seguente comando sostituendo a XX i dpi [24] è una buona scelta di solito ma fare un po di fine-tuning
+```setfont ter-iXXb```
 
 # [RETE]
 
-iwctl
+```iwctl```
 
-station wlan0 connect [nome rete]
+```station wlan0 connect [nome rete]```
 
-exit
+```exit```
 
-ping 8.8.8.8 -> controlla che ti risponda correttamente
+```ping 8.8.8.8``` 
+
+controlla che ti risponda correttamente
 
 # [TIMEZONE]
 
