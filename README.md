@@ -77,6 +77,8 @@ swapon /dev/[partizione swap]
 
 pacstrap -K /mnt base base-devel linux linux-firmware nano btrfs-progs grub-btrfs net-tools
 
+WARNING!! se da problemi pacstrap con la chiave provare il comando ```# pacman -Sy archlinux-keyring```
+
 genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt
